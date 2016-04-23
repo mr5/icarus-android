@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/label_src"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:gravity="center"
+            android:labelFor="@+id/edit_src"
+            android:text="图片地址"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/edit_src"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:hint="输入图片地址"
+            android:inputType="textUri" />
+
+        <TextView
+            android:id="@+id/label_alt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            android:gravity="center"
+            android:labelFor="@+id/edit_alt"
+            android:text="描述"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/edit_alt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:hint="输入描述" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/button_activated"
+                android:text="确认"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@color/button_enabled"
+                android:text="取消"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
