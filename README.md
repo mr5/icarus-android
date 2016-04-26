@@ -40,7 +40,10 @@ class EditorActivity extends Activity {
         // Get WebView from your layout, or create it manually.
         setContentView(R.layout.activity_main);
         webView = (WebView) findViewById(R.id.editor);
-        // I offered a toolbar to manage editor buttons which implements TextView that with icon fonts. It's just a collection, not a Android View implementation. TextViewToolbar will listen click events on all buttons that added to it. You can implement your own `Toolbar`, to prevent these default behaviors.
+        // I offered a toolbar to manage editor buttons which implements TextView that with icon fonts. 
+        // It's just a collection, not a Android View implementation. 
+        // TextViewToolbar will listen click events on all buttons that added to it. 
+        // You can implement your own `Toolbar`, to prevent these default behaviors.
         TextViewToolbar toolbar = new TextViewToolbar();
         Options options = new Options();
         options.setPlaceholder("Placeholder...");
