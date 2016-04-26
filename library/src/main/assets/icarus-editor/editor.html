@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Simditor</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link media="all" rel="stylesheet" type="text/css" href="styles/simditor.css"/>
+    <script type="text/javascript" src="scripts/jquery.min.js"></script>
+</head>
+<body>
+
+<textarea id="txt-content" data-autosave="editor-content" autofocus required style="width: 100%;border:none;">
+</textarea>
+
+<script type="text/javascript" src="scripts/module.js"></script>
+<script type="text/javascript" src="scripts/hotkeys.js"></script>
+<script type="text/javascript" src="scripts/simditor.js"></script>
+<!--<script type="text/javascript" src="assets/scripts/page-demo.js"></script>-->
+
+<script>
+    var editor;
+    var toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', 'alignLeft', 'alignCenter', 'alignRight', 'html'];
+    var defaultOptions = {
+        textarea: $('#txt-content'),
+        placeholder: '',
+        toolbar: toolbar,
+        toolbarHidden: true,
+    }
+
+</script>
+</body>
+</html>

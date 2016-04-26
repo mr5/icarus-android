@@ -1,5 +1,6 @@
 .gradle
 /Icarus.iml
+icarus-android.iml
 /local.properties
 /.idea/
 /.idea/workspace.xml

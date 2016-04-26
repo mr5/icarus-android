@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="EditorIcon">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:textColor">@color/button_enabled</item>
+    </style>
+</resources>
