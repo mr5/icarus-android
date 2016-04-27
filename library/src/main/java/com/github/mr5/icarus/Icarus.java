@@ -189,6 +189,15 @@ public class Icarus {
     }
 
     /**
+     * Insert raw html code to current selection range of editor.
+     *
+     * @param html
+     */
+    public void insertHtml(String html) {
+        jsExec("editor.buttons['html'].insertHtml(" + gson.toJson(html) + ")");
+    }
+
+    /**
      * Call native `Callback` under javascript runtime.
      *
      * @param callbackName You can get `callbackName` by `addCallback` calling.
