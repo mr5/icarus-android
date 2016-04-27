@@ -194,7 +194,7 @@ public class Icarus {
      * @param html
      */
     public void insertHtml(String html) {
-        jsExec("editor.buttons['html'].insertHtml(" + gson.toJson(html) + ")");
+        jsExec("editor.toolbar.buttons['html'].insertHtml(" + gson.toJson(html) + ")");
     }
 
     /**
