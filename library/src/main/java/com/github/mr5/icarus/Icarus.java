@@ -12,6 +12,8 @@ import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Icarus {
     protected HashMap<String, Callback> callbacks = new HashMap<>();
@@ -21,6 +23,8 @@ public class Icarus {
     protected String content;
     protected boolean initialized = false;
     protected Options options;
+    protected LinkedBlockingQueue<Runnable> onReadyCallbacks = new LinkedBlockingQueue<>();
+    protected boolean editorReady = false;
 
     public Icarus(Toolbar toolbar, Options options, WebView webView) {
         this.toolbar = toolbar;
@@ -138,6 +142,14 @@ public class Icarus {
                                 "    });" +
                                 ""
                 );
+                editorReady = true;
+                if (onReadyCallbacks.size() > 0) {
+                    Runnable runnable = onReadyCallbacks.poll();
+                    while (runnable != null) {
+                        runnable.run();
+                        runnable = onReadyCallbacks.poll();
+                    }
+                }
             }
 
         });
@@ -172,19 +184,23 @@ public class Icarus {
      *
      * @param content HTML string
      */
-    public void setContent(String content) {
-        jsExec("editor.setValue(" + gson.toJson(content) + ");");
-        toolbar.resetButtonsStatus();
+    public void setContent(final String content) {
+        runAfterReady(new Runnable() {
+            @Override
+            public void run() {
+                jsExec("editor.setValue(" + gson.toJson(content) + ");");
+                toolbar.resetButtonsStatus();
+            }
+        });
     }
 
     /**
      * Initialize and load WebView data. Must be called again after `setContent` method called.
      */
     public void render() {
+        editorReady = false;
         initialize();
         webView.loadUrl("file:///android_asset/icarus-editor/editor.html");
-//        webView.loadUrl("http://192.168.11.44:8080/editor.html");
-
         toolbar.resetButtonsStatus();
     }
 
@@ -246,5 +262,22 @@ public class Icarus {
     @JavascriptInterface
     public void popover(String buttonName, final String params, final String callbackName) {
         toolbar.popover(buttonName, params, callbackName);
+    }
+
+    /**
+     * Do something one time after the editor ready.
+     *
+     * @param runnable Callback
+     */
+    public void runAfterReady(Runnable runnable) {
+        if (editorReady) {
+            runnable.run();
+        } else {
+            try {
+                onReadyCallbacks.put(runnable);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
