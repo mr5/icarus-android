@@ -1,6 +1,9 @@
 ## icarus-android
 Maybe the best rich text editor on android platform. Base on [Simditor](https://github.com/mycolorway/simditor)
 
+![demo](demo.gif)	
+
+
 ## Features
 * Alignment (left/center/right)
 * Bold
