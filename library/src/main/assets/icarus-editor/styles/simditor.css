@@ -201,7 +201,7 @@ table {
   position: relative;
   border: none;
 }
-.simditor img, .simditor iframe {
+.simditor img, .simditor iframe, .simditor pre {
   max-width: 100% !important;
 }
 .simditor .simditor-wrapper {
