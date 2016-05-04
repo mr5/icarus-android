@@ -14,7 +14,7 @@
   }
 }(this, function ($, SimpleModule, simpleHotkeys, simpleUploader) {
 
-var AlignCenterButton, AlignLeftButton, AlignRightButton, AlignmentButton, BlockquoteButton, BoldButton, Button, Clipboard, CodeButton, CodePopover, ColorButton, FontScaleButton, Formatter, HrButton, HtmlButton, ImageButton, ImagePopover, IndentButton, Indentation, InputManager, ItalicButton, Keystroke, LinkButton, LinkPopover, ListButton, OrderListButton, OutdentButton, Popover, Selection, Simditor, SimditorMention, StrikethroughButton, TableButton, TitleButton, Toolbar, UnderlineButton, UndoManager, UnorderListButton, Util,
+var AlignCenterButton, AlignLeftButton, AlignRightButton, AlignmentButton, BlockquoteButton, BoldButton, Button, Clipboard, CodeButton, CodePopover, ColorButton, FontScaleButton, Formatter, HrButton, HtmlButton, ImageButton, ImagePopover, IndentButton, Indentation, InputManager, ItalicButton, Keystroke, LinkButton, ListButton, OrderListButton, OutdentButton, Popover, Selection, Simditor, SimditorMention, StrikethroughButton, TableButton, TitleButton, Toolbar, UnderlineButton, UndoManager, UnorderListButton, Util,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
@@ -4391,21 +4391,43 @@ LinkButton = (function(superClass) {
     return LinkButton.__super__.render.apply(this, args);
   };
 
+  LinkButton.prototype._getAllAttributes = function(element) {
+    var attr, attrs, hash, k, len;
+    hash = {};
+    if (!(attrs = element.attributes)) {
+      return hash;
+    }
+    for (k = 0, len = attrs.length; k < len; k++) {
+      attr = attrs[k];
+      hash[attr.name] = attr.value;
+    }
+    console.log(hash);
+    return hash;
+  };
+
+  LinkButton.prototype._setAttributes = function(element, attributes) {
+    var key, results;
+    console.log('_setAttributes()', attributes);
+    results = [];
+    for (key in attributes) {
+      results.push(element.attr(key, attributes[key]));
+    }
+    return results;
+  };
+
   LinkButton.prototype._status = function() {
     var callback_id;
     LinkButton.__super__._status.call(this);
     if (this.active && !this.editor.selection.rangeAtEndOf(this.node)) {
       callback_id = this.editor.addCallback(this, function(params) {
-        console.log(params);
-        this.node.attr('href', params.url);
-        this.node.attr('target', params.target);
+        this._setAttributes(this.node, params.attributes);
         this.node.text(params.text);
         this.editor.inputManager.throttledValueChanged();
-        return this.editor.removeCallback(_callback_id);
+        return this.editor.removeCallback(callback_id);
       });
       IcarusBridge.popover(this.name, JSON.stringify({
         text: this.node.text(),
-        url: this.node.attr('href')
+        attributes: this._getAllAttributes(this.node[0])
       }), callback_id);
       return console.log("popover:" + this.name);
     }
@@ -4441,87 +4463,6 @@ LinkButton = (function(superClass) {
   return LinkButton;
 
 })(Button);
-
-LinkPopover = (function(superClass) {
-  extend(LinkPopover, superClass);
-
-  function LinkPopover() {
-    return LinkPopover.__super__.constructor.apply(this, arguments);
-  }
-
-  LinkPopover.prototype.render = function() {
-    var tpl;
-    tpl = "<div class=\"link-settings\">\n  <div class=\"settings-field\">\n    <label>" + (this._t('linkText')) + "</label>\n    <input class=\"link-text\" type=\"text\"/>\n    <a class=\"btn-unlink\" href=\"javascript:;\" title=\"" + (this._t('removeLink')) + "\"\n      tabindex=\"-1\">\n      <span class=\"simditor-icon simditor-icon-unlink\"></span>\n    </a>\n  </div>\n  <div class=\"settings-field\">\n    <label>" + (this._t('linkUrl')) + "</label>\n    <input class=\"link-url\" type=\"text\"/>\n  </div>\n  <div class=\"settings-field\">\n    <label>" + (this._t('linkTarget')) + "</label>\n    <select class=\"link-target\">\n      <option value=\"_blank\">" + (this._t('openLinkInNewWindow')) + " (_blank)</option>\n      <option value=\"_self\">" + (this._t('openLinkInCurrentWindow')) + " (_self)</option>\n    </select>\n  </div>\n</div>";
-    this.el.addClass('link-popover').append(tpl);
-    this.textEl = this.el.find('.link-text');
-    this.urlEl = this.el.find('.link-url');
-    this.unlinkEl = this.el.find('.btn-unlink');
-    this.selectTarget = this.el.find('.link-target');
-    this.textEl.on('keyup', (function(_this) {
-      return function(e) {
-        if (e.which === 13) {
-          return;
-        }
-        _this.target.text(_this.textEl.val());
-        return _this.editor.inputManager.throttledValueChanged();
-      };
-    })(this));
-    this.urlEl.on('keyup', (function(_this) {
-      return function(e) {
-        var val;
-        if (e.which === 13) {
-          return;
-        }
-        val = _this.urlEl.val();
-        if (!(/https?:\/\/|^\//ig.test(val) || !val)) {
-          val = 'http://' + val;
-        }
-        _this.target.attr('href', val);
-        return _this.editor.inputManager.throttledValueChanged();
-      };
-    })(this));
-    $([this.urlEl[0], this.textEl[0]]).on('keydown', (function(_this) {
-      return function(e) {
-        var range;
-        if (e.which === 13 || e.which === 27 || (!e.shiftKey && e.which === 9 && $(e.target).hasClass('link-url'))) {
-          e.preventDefault();
-          range = document.createRange();
-          _this.editor.selection.setRangeAfter(_this.target, range);
-          _this.hide();
-          return _this.editor.inputManager.throttledValueChanged();
-        }
-      };
-    })(this));
-    this.unlinkEl.on('click', (function(_this) {
-      return function(e) {
-        var range, txtNode;
-        txtNode = document.createTextNode(_this.target.text());
-        _this.target.replaceWith(txtNode);
-        _this.hide();
-        range = document.createRange();
-        _this.editor.selection.setRangeAfter(txtNode, range);
-        return _this.editor.inputManager.throttledValueChanged();
-      };
-    })(this));
-    return this.selectTarget.on('change', (function(_this) {
-      return function(e) {
-        _this.target.attr('target', _this.selectTarget.val());
-        return _this.editor.inputManager.throttledValueChanged();
-      };
-    })(this));
-  };
-
-  LinkPopover.prototype.show = function() {
-    var args;
-    args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-    LinkPopover.__super__.show.apply(this, args);
-    this.textEl.val(this.target.text());
-    return this.urlEl.val(this.target.attr('href'));
-  };
-
-  return LinkPopover;
-
-})(Popover);
 
 Simditor.Toolbar.addButton(LinkButton);
 

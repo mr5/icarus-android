@@ -2,6 +2,7 @@ package com.github.mr5.icarus.button;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -44,7 +45,7 @@ public class LinkButton extends TextViewButton {
     @Override
     public void popover(String params, final String callbackName) {
         Gson gson = new Gson();
-
+        Log.d("@popover params", params);
         final Link link = gson.fromJson(params, Link.class);
 
 

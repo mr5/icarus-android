@@ -201,6 +201,7 @@ public class Icarus {
         editorReady = false;
         initialize();
         webView.loadUrl("file:///android_asset/icarus-editor/editor.html");
+//        webView.loadUrl("http://192.168.11.44:8080/editor.html");
         toolbar.resetButtonsStatus();
     }
 

@@ -5,8 +5,6 @@ import java.util.Map;
 
 public class Link {
     private String text = "";
-    private String url = "";
-    private String target = "_blank";
     private Map<String, String> attributes;
 
     public String getText() {
@@ -18,19 +16,19 @@ public class Link {
     }
 
     public String getUrl() {
-        return url;
+        return getAttribute("href");
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        setAttribute("href", url);
     }
 
     public String getTarget() {
-        return target;
+        return getAttribute("target");
     }
 
     public void setTarget(String target) {
-        this.target = target;
+        setAttribute("target", target);
     }
 
     public Map<String, String> getAttributes() {
@@ -41,7 +39,15 @@ public class Link {
         this.attributes = attributes;
     }
 
-    public void addAttribute(String name, String value) {
+    public String getAttribute(String name) {
+        if (attributes == null) {
+            return null;
+        }
+
+        return attributes.get(name);
+    }
+
+    public void setAttribute(String name, String value) {
         if (attributes == null) {
             attributes = new HashMap<>();
         }
