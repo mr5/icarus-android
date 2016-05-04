@@ -280,4 +280,44 @@ public class Icarus {
             }
         }
     }
+
+    public void loadCSS(String cssUrl) {
+
+        final String js = String.format(
+                "$(function() {" +
+                        "$('head').append(" +
+                        "'</link>', " +
+                        "{rel:'stylesheet', type:'text/css', href:'%s', media:'all'}" +
+                        ")" +
+                        "});",
+                cssUrl
+        );
+
+        runAfterReady(new Runnable() {
+            @Override
+            public void run() {
+                jsExec(js);
+            }
+        });
+    }
+
+    public void loadJs(String jsUrl) {
+
+        final String js = String.format(
+                "$(function() {" +
+                        "$('head').append(" +
+                        "'</script>', " +
+                        "{type:'text/javascript', src:'%s'}" +
+                        ")" +
+                        "});",
+                jsUrl
+        );
+
+        runAfterReady(new Runnable() {
+            @Override
+            public void run() {
+                jsExec(js);
+            }
+        });
+    }
 }

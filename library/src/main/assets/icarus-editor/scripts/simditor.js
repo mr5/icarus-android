@@ -4111,7 +4111,7 @@ CodeButton = (function(superClass) {
 
   CodeButton.prototype.htmlTag = 'pre';
 
-  CodeButton.prototype.disableTag = 'ul, ol, table, pre, hr';
+  CodeButton.prototype.disableTag = 'ul, ol, table, hr';
 
   CodeButton.prototype._init = function() {
     CodeButton.__super__._init.call(this);
