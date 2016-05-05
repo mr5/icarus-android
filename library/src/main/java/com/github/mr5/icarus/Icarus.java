@@ -1,5 +1,6 @@
 package com.github.mr5.icarus;
 
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
@@ -127,6 +128,11 @@ public class Icarus {
             return;
         }
         webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+            }
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -305,12 +311,11 @@ public class Icarus {
     public void loadJs(String jsUrl) {
 
         final String js = String.format(
-                "$(function() {" +
-                        "$('head').append(" +
-                        "$('<script></script>', " +
-                        "{type:'text/javascript', src:'%s'})" +
-                        ")" +
-                        "});",
+                        "        var body  = document.getElementsByTagName(\"body\")[0];\n" +
+                        "        var script  = document.createElement(\"script\");\n" +
+                        "        script.type = \"text/javascript\";\n" +
+                        "        script.src = \"%s\";\n" +
+                        "        body.appendChild(script);",
                 jsUrl
         );
 

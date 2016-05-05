@@ -38,8 +38,9 @@ public class MainActivity extends ActionBarActivity {
         options.setPlaceholder("Type in something...");
         icarus = new Icarus(toolbar, options, webView);
         prepareToolbar(toolbar, icarus);
-        icarus.loadCSS("file:///android_asset/editor.css");
         icarus.render();
+        icarus.loadCSS("file:///android_asset/editor.css");
+        icarus.loadJs("file:///android_asset/test.js");
 
     }
 
