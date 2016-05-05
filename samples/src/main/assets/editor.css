@@ -1,0 +1,21 @@
+.simditor .simditor-body hr, .editor-style hr {
+    margin-top: 44px;
+    margin-bottom: 34px;
+    display:block;
+    border:0;
+    text-align:center;
+    font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.4;
+    letter-spacing: .6em;
+}
+.simditor .simditor-body hr:before, .editor-style hr:before {
+    content:'...';
+    display:inline-block;
+    margin-left:.6em;
+    color:rgba(0,0,0,.6);
+    position:relative;
+    top:-30px
+}

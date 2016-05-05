@@ -287,8 +287,8 @@ public class Icarus {
         final String js = String.format(
                 "$(function() {" +
                         "$('head').append(" +
-                        "'</link>', " +
-                        "{rel:'stylesheet', type:'text/css', href:'%s', media:'all'}" +
+                        "$('<link></link>', " +
+                        "{rel:'stylesheet', type:'text/css', href:'%s', media:'all'})" +
                         ")" +
                         "});",
                 cssUrl
@@ -307,8 +307,8 @@ public class Icarus {
         final String js = String.format(
                 "$(function() {" +
                         "$('head').append(" +
-                        "'</script>', " +
-                        "{type:'text/javascript', src:'%s'}" +
+                        "$('<script></script>', " +
+                        "{type:'text/javascript', src:'%s'})" +
                         ")" +
                         "});",
                 jsUrl

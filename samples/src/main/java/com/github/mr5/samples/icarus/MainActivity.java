@@ -35,10 +35,12 @@ public class MainActivity extends ActionBarActivity {
         webView = (WebView) findViewById(R.id.editor);
         TextViewToolbar toolbar = new TextViewToolbar();
         Options options = new Options();
-        options.setPlaceholder("在这里输入您的话题内容...");
+        options.setPlaceholder("Type in something...");
         icarus = new Icarus(toolbar, options, webView);
         prepareToolbar(toolbar, icarus);
+        icarus.loadCSS("file:///android_asset/editor.css");
         icarus.render();
+
     }
 
     private Toolbar prepareToolbar(TextViewToolbar toolbar, Icarus icarus) {
