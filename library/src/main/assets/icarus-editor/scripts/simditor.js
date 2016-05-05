@@ -4434,7 +4434,7 @@ LinkButton = (function(superClass) {
   };
 
   LinkButton.prototype.command = function() {
-    var $contents, $link, $newBlock, linkText, range, txtNode;
+    var $contents, $link, $newBlock, callback_id, linkText, range, txtNode;
     range = this.editor.selection.range();
     if (this.active) {
       txtNode = document.createTextNode(this.node.text());
@@ -4443,18 +4443,42 @@ LinkButton = (function(superClass) {
     } else {
       $contents = $(range.extractContents());
       linkText = this.editor.formatter.clearHtml($contents.contents(), false);
-      $link = $('<a/>', {
-        href: 'http://www.example.com',
-        target: '_blank',
-        text: linkText || this._t('linkText')
-      });
-      if (this.editor.selection.blockNodes().length > 0) {
-        range.insertNode($link[0]);
+      if (!linkText) {
+        callback_id = this.editor.addCallback(this, function(params) {
+          var $link, $newBlock;
+          $link = $('<a/>', params.attributes);
+          $link.text(params.text);
+          if (this.editor.selection.blockNodes().length > 0) {
+            range.insertNode($link[0]);
+          } else {
+            $newBlock = $('<p/>').append($link);
+            range.insertNode($newBlock[0]);
+          }
+          range.selectNodeContents($link[0]);
+          this.editor.trigger('valuechanged');
+          return this.editor.removeCallback(callback_id);
+        });
       } else {
-        $newBlock = $('<p/>').append($link);
-        range.insertNode($newBlock[0]);
+        $link = $('<a/>', {});
+        $link.text(linkText);
+        if (this.editor.selection.blockNodes().length > 0) {
+          range.insertNode($link[0]);
+        } else {
+          $newBlock = $('<p/>').append($link);
+          range.insertNode($newBlock[0]);
+        }
+        range.selectNodeContents($link[0]);
+        callback_id = this.editor.addCallback(this, function(params) {
+          this._setAttributes($link, params.attributes);
+          $link.text(params.text);
+          this.editor.inputManager.throttledValueChanged();
+          return this.editor.removeCallback(callback_id);
+        });
       }
-      range.selectNodeContents($link[0]);
+      IcarusBridge.popover(this.name, JSON.stringify({
+        text: linkText || '',
+        attributes: {}
+      }), callback_id);
     }
     this.editor.selection.range(range);
     return this.editor.trigger('valuechanged');
