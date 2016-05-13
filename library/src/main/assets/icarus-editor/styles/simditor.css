@@ -1,8 +1,3 @@
-/*!
-* Simditor v2.3.6
-* http://simditor.tower.im/
-* 2016-05-05
-*/
 /**
  * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
  * http://cssreset.com
@@ -195,6 +190,16 @@ table {
 
 .simditor-icon-checklist:before {
   content: '\f01e';
+}
+
+body, html {
+  overflow-x: hidden;
+}
+
+textarea {
+  border: none;
+  outline: none;
+  margin: 5px;
 }
 
 .simditor {

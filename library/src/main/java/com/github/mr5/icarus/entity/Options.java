@@ -1,5 +1,9 @@
 package com.github.mr5.icarus.entity;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Options {
     /**
      * Placeholder of Editor. Use the placeholder attribute value of the textarea by default.
@@ -18,6 +22,7 @@ public class Options {
      * Tags that are allowed in Editor.
      */
     private String[] allowedTags = {"br", "span", "a", "img", "b", "strong", "i", "strike", "u", "font", "p", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "hr"};
+    private Map<String, List<String>> allowedAttributes = new HashMap<>();
 
     public String getPlaceholder() {
         return placeholder;
@@ -51,4 +56,15 @@ public class Options {
         this.allowedTags = allowedTags;
     }
 
+    public Map<String, List<String>> getAllowedAttributes() {
+        return allowedAttributes;
+    }
+
+    public void setAllowedAttributes(Map<String, List<String>> allowedAttributes) {
+        this.allowedAttributes = allowedAttributes;
+    }
+
+    public void addAllowedAttributes(String tag, List<String> attributes) {
+        allowedAttributes.put(tag, attributes);
+    }
 }

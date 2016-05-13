@@ -20,6 +20,7 @@ import com.github.mr5.icarus.button.ImageButton;
 import com.github.mr5.icarus.button.LinkButton;
 import com.github.mr5.icarus.entity.Options;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -36,6 +37,9 @@ public class MainActivity extends ActionBarActivity {
         TextViewToolbar toolbar = new TextViewToolbar();
         Options options = new Options();
         options.setPlaceholder("Type in something...");
+        options.addAllowedAttributes("img", Arrays.asList("data-heatmap-id"));
+        options.addAllowedAttributes("iframe", Arrays.asList("data-heatmap-id"));
+
         icarus = new Icarus(toolbar, options, webView);
         prepareToolbar(toolbar, icarus);
         icarus.render();
