@@ -84,45 +84,51 @@ class EditorActivity extends Activity {
 * alignRight
 
 ## Options
-### placeholder: String
-
-default: "Icarus editor."
+#### placeholder: String
 
 > Placeholder of Editor. Use the placeholder attribute value of the textarea by default.
 
-Example:
+**default:** "Icarus editor."
+
+
+**Example:**
 
 ```java
 options.setPlaceholder("Input something...");
 ```
 
-### defaultImage: String
-
-default: "images/image.png"
+#### defaultImage: String
 
 > Default image placeholder. Used when inserting pictures in Edtior.
 
-Example:
+**default:** "images/image.png"
+
+**Example:**
 
 ```java
 options.setDefaultImage("file:///android_asset/xxx.jpg");
 ```
 
-### cleanPaste: Boolean
-default: false
+#### cleanPaste: Boolean
+
 > Remove all styles in paste content automatically.
 
-Example:
+**default:**  false
+
+**Example:**
 
 ```java
 options.setCleanPaste(true);
 ```
 
-### allowedTags: String[]
-default: {"br", "span", "a", "img", "b", "strong", "i", "strike", "u", "font", "p", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "hr"}
+#### allowedTags: String[]
+
+> Tags that are allowed in Simditor
+
+**default:** {"br", "span", "a", "img", "b", "strong", "i", "strike", "u", "font", "p", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "hr"}
 > Tags that are allowed in Editor.
 
-Example:
+**Example:**
 
 ```java
 // option replacement.
@@ -131,9 +137,12 @@ options.setAllowedTags(new String[]{"a", "span", "img"});
 options.addAllowedTag("pre");
 ```
 
-### allowedAttributes: Map&lt;String, List&lt;String&gt;&gt;
+#### allowedAttributes: Map&lt;String, List&lt;String&gt;&gt;
 
-default: 
+
+> Whitelist of tag attributes.  Note that custom whitelist will be merged into the default one.
+
+**default:** 
 
 ```javascript
 img: {"src", "alt", "width", "height", "data-non-image"}
@@ -142,16 +151,16 @@ font: {"color"}
 code: {"class"}
 ```
 
-> Whitelist of tag attributes.  Note that custom whitelist will be merged into the default one.
+**Example:**
 
-Example:
 ```java
 // option replacement.
 options.setAllowedAttributes(new HashMap<String, List<String>>());
 // add new attribute to current tag list.
 options.addAllowedAttributes("a", Arrays.asList("class", "src", "alt", "data-type"));
 ```
-## Load Javascript or Stylesheet files.
+
+#### Load Javascript or Stylesheet files.
 
 ```java
 icarus.loadCSS("file:///android_asset/editor.css");
