@@ -88,10 +88,10 @@ class EditorActivity extends Activity {
 
 > Placeholder of Editor. Use the placeholder attribute value of the textarea by default.
 
-**default:** "Icarus editor."
+default: "Icarus editor."
 
 
-**Example:**
+Example:
 
 ```java
 options.setPlaceholder("Input something...");
@@ -101,9 +101,9 @@ options.setPlaceholder("Input something...");
 
 > Default image placeholder. Used when inserting pictures in Edtior.
 
-**default:** "images/image.png"
+default: "images/image.png"
 
-**Example:**
+Example:
 
 ```java
 options.setDefaultImage("file:///android_asset/xxx.jpg");
@@ -113,9 +113,9 @@ options.setDefaultImage("file:///android_asset/xxx.jpg");
 
 > Remove all styles in paste content automatically.
 
-**default:**  false
+default:  false
 
-**Example:**
+Example:
 
 ```java
 options.setCleanPaste(true);
@@ -123,12 +123,11 @@ options.setCleanPaste(true);
 
 #### allowedTags: String[]
 
-> Tags that are allowed in Simditor
+> Tags that are allowed in Editor
 
-**default:** {"br", "span", "a", "img", "b", "strong", "i", "strike", "u", "font", "p", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "hr"}
-> Tags that are allowed in Editor.
+default: {"br", "span", "a", "img", "b", "strong", "i", "strike", "u", "font", "p", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "hr"}
 
-**Example:**
+Example:
 
 ```java
 // option replacement.
@@ -142,7 +141,7 @@ options.addAllowedTag("pre");
 
 > Whitelist of tag attributes.  Note that custom whitelist will be merged into the default one.
 
-**default:** 
+default:
 
 ```javascript
 img: {"src", "alt", "width", "height", "data-non-image"}
@@ -151,7 +150,7 @@ font: {"color"}
 code: {"class"}
 ```
 
-**Example:**
+Example:
 
 ```java
 // option replacement.
