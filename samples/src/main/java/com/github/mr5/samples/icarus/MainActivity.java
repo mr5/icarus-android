@@ -37,8 +37,11 @@ public class MainActivity extends ActionBarActivity {
         TextViewToolbar toolbar = new TextViewToolbar();
         Options options = new Options();
         options.setPlaceholder("Type in something...");
-        options.addAllowedAttributes("img", Arrays.asList("data-heatmap-id"));
-        options.addAllowedAttributes("iframe", Arrays.asList("data-heatmap-id"));
+        //  img: ['src', 'alt', 'width', 'height', 'data-non-image']
+        // a: ['href', 'target']
+        options.addAllowedAttributes("img", Arrays.asList("data-type", "data-id", "class", "src", "alt", "width", "height", "data-non-image"));
+        options.addAllowedAttributes("iframe", Arrays.asList("data-type", "data-id", "class", "src", "width", "height"));
+        options.addAllowedAttributes("a", Arrays.asList("data-type", "data-id", "class", "href", "target", "title"));
 
         icarus = new Icarus(toolbar, options, webView);
         prepareToolbar(toolbar, icarus);

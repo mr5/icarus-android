@@ -60,3 +60,9 @@ class EditorActivity extends Activity {
 ```
 
 [Sample](https://github.com/mr5/icarus-android/tree/master/samples)
+
+## License
+[MIT](https://opensource.org/licenses/MIT)
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-icarus--android-green.svg?style=true)](https://android-arsenal.com/details/1/3601)
+
