@@ -9,7 +9,7 @@ Maybe the best rich text editor on android platform. Base on [Simditor](https://
 * Bold
 * Blockquote
 * Code
-* Horizontal rule
+* Horizontal ruler
 * Italic
 * Image
 * Indent
@@ -23,7 +23,7 @@ Maybe the best rich text editor on android platform. Base on [Simditor](https://
 ## Usage
 Add this line to your `build.gradle` file under your module directory.
 ```groovy
-compile 'com.github.mr5:icarus:0.1.6-SNAPSHOT'
+compile 'com.github.mr5:icarus:0.1.12-SNAPSHOT'
 ```
 Java codes:
 ```java
@@ -61,6 +61,28 @@ class EditorActivity extends Activity {
 
 [Sample](https://github.com/mr5/icarus-android/tree/master/samples)
 
+## Button Names
+* title
+* bold
+* italic
+* underline
+* strikethrough
+* fontScale
+* color
+* ol             # ordered list
+* ul             # unordered list
+* blockquote
+* code           # code block
+* table
+* link
+* image
+* hr             # horizontal ruler
+* indent
+* outdent
+* alignLeft
+* alignCenter
+* alignRight
+
 ## Options
 ### placeholder: String
 
@@ -83,7 +105,7 @@ default: "images/image.png"
 Example:
 
 ```java
-options.setDefaultImage("file:///android_assets/xxx.jpg");
+options.setDefaultImage("file:///android_asset/xxx.jpg");
 ```
 
 ### cleanPaste: Boolean
@@ -128,6 +150,12 @@ Example:
 options.setAllowedAttributes(new HashMap<String, List<String>>());
 // add new attribute to current tag list.
 options.addAllowedAttributes("a", Arrays.asList("class", "src", "alt", "data-type"));
+```
+## Load Javascript or Stylesheet files.
+
+```java
+icarus.loadCSS("file:///android_asset/editor.css");
+icarus.loadJs("file:///android_asset/test.js");
 ```
 
 ## License
