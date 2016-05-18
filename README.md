@@ -23,7 +23,7 @@ Maybe the best rich text editor on android platform. Base on [Simditor](https://
 ## Usage
 Add this line to your `build.gradle` file under your module directory.
 ```groovy
-compile 'com.github.mr5:icarus:0.1.10-SNAPSHOT'
+compile 'com.github.mr5:icarus:0.1.6-SNAPSHOT'
 ```
 Java codes:
 ```java
@@ -61,8 +61,79 @@ class EditorActivity extends Activity {
 
 [Sample](https://github.com/mr5/icarus-android/tree/master/samples)
 
+## Options
+### placeholder: String
+
+default: "Icarus editor."
+
+> Placeholder of Editor. Use the placeholder attribute value of the textarea by default.
+
+Example:
+
+```java
+options.setPlaceholder("Input something...");
+```
+
+### defaultImage: String
+
+default: "images/image.png"
+
+> Default image placeholder. Used when inserting pictures in Edtior.
+
+Example:
+
+```java
+options.setDefaultImage("file:///android_assets/xxx.jpg");
+```
+
+### cleanPaste: Boolean
+default: false
+> Remove all styles in paste content automatically.
+
+Example:
+
+```java
+options.setCleanPaste(true);
+```
+
+### allowedTags: String[]
+default: {"br", "span", "a", "img", "b", "strong", "i", "strike", "u", "font", "p", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "hr"}
+> Tags that are allowed in Editor.
+
+Example:
+
+```java
+// option replacement.
+options.setAllowedTags(new String[]{"a", "span", "img"});
+// add tag to current tag list.
+options.addAllowedTag("pre");
+```
+
+### allowedAttributes: Map&lt;String, List&lt;String&gt;&gt;
+
+default: 
+
+```javascript
+img: {"src", "alt", "width", "height", "data-non-image"}
+a: {"href", "target"}
+font: {"color"}
+code: {"class"}
+```
+
+> Whitelist of tag attributes.  Note that custom whitelist will be merged into the default one.
+
+Example:
+```java
+// option replacement.
+options.setAllowedAttributes(new HashMap<String, List<String>>());
+// add new attribute to current tag list.
+options.addAllowedAttributes("a", Arrays.asList("class", "src", "alt", "data-type"));
+```
+
 ## License
 [MIT](https://opensource.org/licenses/MIT)
+
+
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-icarus--android-green.svg?style=true)](https://android-arsenal.com/details/1/3601)
 

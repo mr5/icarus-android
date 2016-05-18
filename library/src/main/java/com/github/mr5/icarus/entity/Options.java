@@ -56,6 +56,17 @@ public class Options {
         this.allowedTags = allowedTags;
     }
 
+    public void addAllowedTag(String tagName) {
+        if (allowedTags == null) {
+            allowedTags = new String[]{};
+        }
+        int length = allowedTags.length;
+        if (length <= 0) {
+            length = -1;
+        }
+        allowedTags[length + 1] = tagName;
+    }
+
     public Map<String, List<String>> getAllowedAttributes() {
         return allowedAttributes;
     }
