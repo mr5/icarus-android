@@ -62,26 +62,7 @@ class EditorActivity extends Activity {
 [Sample](https://github.com/mr5/icarus-android/tree/master/samples)
 
 ## Button Names
-* title
-* bold
-* italic
-* underline
-* strikethrough
-* fontScale
-* color
-* ol             # ordered list
-* ul             # unordered list
-* blockquote
-* code           # code block
-* table
-* link
-* image
-* hr             # horizontal ruler
-* indent
-* outdent
-* alignLeft
-* alignCenter
-* alignRight
+see [Button.java](library/src/main/java/com/github/mr5/icarus/button/Button.java)
 
 ## Options
 #### placeholder: String
