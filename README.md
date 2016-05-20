@@ -184,6 +184,24 @@ TextView imageButtonTextView = (TextView) findViewById(R.id.button_image);
 
 > You can implement your own popover to handler user's actions.
 
+
+## Contents getting and setting
+```java
+// Get contents
+icarus.getContent(new Callback() {
+                @Override
+                public void run(String params) {
+	                Gson gson = new Gson();
+			        Html html = gson.fromJson(params, Html.class);
+					Log.d("Content gotten", html.getContent());
+                }
+            });
+
+
+// Set contents
+icarus.setContent("new content");
+```
+
 ## License
 [MIT](https://opensource.org/licenses/MIT)
 
