@@ -156,11 +156,12 @@ Some buttons depend user's actions, such as `Button.NAME_LINK`, `Button.NAME_IMA
 Samples:
 ```java
 TextView imageButtonTextView = (TextView) findViewById(R.id.button_image);
-        imageButtonTextView.setTypeface(iconfont);
-        TextViewButton imageButton = new TextViewButton(imageButtonTextView, icarus);
-        imageButton.setName(Button.NAME_IMAGE);
-        imageButton.setPopover(new ImagePopoverImpl(imageButtonTextView, icarus));
-        toolbar.addButton(imageButton);
+imageButtonTextView.setTypeface(iconfont);
+TextViewButton imageButton = new TextViewButton(imageButtonTextView, icarus);
+imageButton.setName(Button.NAME_IMAGE);
+imageButton.setPopover(new ImagePopoverImpl(imageButtonTextView, icarus));
+
+toolbar.addButton(imageButton);
 ```
 
 > You can implement your own popover to handler user's actions.
