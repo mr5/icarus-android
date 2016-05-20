@@ -1,5 +1,7 @@
 package com.github.mr5.icarus.entity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,7 @@ public class Options {
     /**
      * Tags that are allowed in Editor.
      */
-    private String[] allowedTags = {"br", "span", "a", "img", "b", "strong", "i", "strike", "u", "font", "p", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "hr"};
+    private List<String> allowedTags = Arrays.asList("br", "span", "a", "img", "b", "strong", "i", "strike", "u", "font", "p", "ul", "ol", "li", "blockquote", "pre", "code", "h1", "h2", "h3", "h4", "hr");
     private Map<String, List<String>> allowedAttributes = new HashMap<>();
 
     public String getPlaceholder() {
@@ -48,23 +50,19 @@ public class Options {
         this.cleanPaste = cleanPaste;
     }
 
-    public String[] getAllowedTags() {
+    public List<String> getAllowedTags() {
         return allowedTags;
     }
 
-    public void setAllowedTags(String[] allowedTags) {
+    public void setAllowedTags(List<String> allowedTags) {
         this.allowedTags = allowedTags;
     }
 
     public void addAllowedTag(String tagName) {
         if (allowedTags == null) {
-            allowedTags = new String[]{};
+            allowedTags = new ArrayList<>();
         }
-        int length = allowedTags.length;
-        if (length <= 0) {
-            length = -1;
-        }
-        allowedTags[length + 1] = tagName;
+        allowedTags.add(tagName);
     }
 
     public Map<String, List<String>> getAllowedAttributes() {

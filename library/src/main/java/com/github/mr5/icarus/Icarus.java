@@ -288,6 +288,11 @@ public class Icarus {
         }
     }
 
+    /**
+     * Load css file.
+     *
+     * @param cssUrl Css file url that you want to load
+     */
     public void loadCSS(String cssUrl) {
 
         final String js = String.format(
@@ -308,10 +313,15 @@ public class Icarus {
         });
     }
 
+    /**
+     * Load javascript file
+     *
+     * @param jsUrl Javascript file url that you want to load
+     */
     public void loadJs(String jsUrl) {
 
         final String js = String.format(
-                        "        var body  = document.getElementsByTagName(\"body\")[0];\n" +
+                "        var body  = document.getElementsByTagName(\"body\")[0];\n" +
                         "        var script  = document.createElement(\"script\");\n" +
                         "        script.type = \"text/javascript\";\n" +
                         "        script.src = \"%s\";\n" +

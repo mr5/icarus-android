@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.github.mr5.icarus.Icarus;
 import com.github.mr5.icarus.R;
+import com.github.mr5.icarus.popover.Popover;
 import com.google.gson.Gson;
 
 public class TextViewButton implements Button {
@@ -20,6 +21,7 @@ public class TextViewButton implements Button {
     protected int disabledColor;
     protected int activatedColor;
     protected int deactivatedColor;
+    protected Popover popover;
 
     public int getEnabledColor() {
         return enabledColor;
@@ -125,5 +127,15 @@ public class TextViewButton implements Button {
     public void resetStatus() {
         setActivated(false);
         setEnabled(true);
+    }
+
+    @Override
+    public void setPopover(Popover popover) {
+        this.popover = popover;
+    }
+
+    @Override
+    public Popover getPopover() {
+        return popover;
     }
 }

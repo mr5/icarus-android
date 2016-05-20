@@ -1,6 +1,5 @@
 package com.github.mr5.samples.icarus;
 
-import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -14,11 +13,12 @@ import com.github.mr5.icarus.Callback;
 import com.github.mr5.icarus.Icarus;
 import com.github.mr5.icarus.TextViewToolbar;
 import com.github.mr5.icarus.Toolbar;
-import com.github.mr5.icarus.button.HtmlButton;
+import com.github.mr5.icarus.button.Button;
 import com.github.mr5.icarus.button.TextViewButton;
-import com.github.mr5.icarus.button.ImageButton;
-import com.github.mr5.icarus.button.LinkButton;
 import com.github.mr5.icarus.entity.Options;
+import com.github.mr5.icarus.popover.HtmlPopoverImpl;
+import com.github.mr5.icarus.popover.ImagePopoverImpl;
+import com.github.mr5.icarus.popover.LinkPopoverImpl;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
         webView = (WebView) findViewById(R.id.editor);
         TextViewToolbar toolbar = new TextViewToolbar();
         Options options = new Options();
-        options.setPlaceholder("Type in something...");
+        options.setPlaceholder("Input something...");
         //  img: ['src', 'alt', 'width', 'height', 'data-non-image']
         // a: ['href', 'target']
         options.addAllowedAttributes("img", Arrays.asList("data-type", "data-id", "class", "src", "alt", "width", "height", "data-non-image"));
@@ -45,28 +45,27 @@ public class MainActivity extends ActionBarActivity {
 
         icarus = new Icarus(toolbar, options, webView);
         prepareToolbar(toolbar, icarus);
-        icarus.render();
         icarus.loadCSS("file:///android_asset/editor.css");
         icarus.loadJs("file:///android_asset/test.js");
-
+        icarus.render();
     }
 
     private Toolbar prepareToolbar(TextViewToolbar toolbar, Icarus icarus) {
         Typeface iconfont = Typeface.createFromAsset(getAssets(), "Simditor.ttf");
         HashMap<String, Integer> generalButtons = new HashMap<>();
-        generalButtons.put("bold", com.github.mr5.icarus.R.id.button_bold);
-        generalButtons.put("ol", com.github.mr5.icarus.R.id.button_list_ol);
-        generalButtons.put("blockquote", com.github.mr5.icarus.R.id.button_blockquote);
-        generalButtons.put("hr", com.github.mr5.icarus.R.id.button_hr);
-        generalButtons.put("ul", com.github.mr5.icarus.R.id.button_list_ul);
-        generalButtons.put("alignLeft", com.github.mr5.icarus.R.id.button_align_left);
-        generalButtons.put("alignCenter", com.github.mr5.icarus.R.id.button_align_center);
-        generalButtons.put("alignRight", com.github.mr5.icarus.R.id.button_align_right);
-        generalButtons.put("italic", com.github.mr5.icarus.R.id.button_italic);
-        generalButtons.put("indent", com.github.mr5.icarus.R.id.button_indent);
-        generalButtons.put("outdent", com.github.mr5.icarus.R.id.button_outdent);
-        generalButtons.put("code", com.github.mr5.icarus.R.id.button_math);
-        generalButtons.put("underline", com.github.mr5.icarus.R.id.button_underline);
+        generalButtons.put(Button.NAME_BOLD, com.github.mr5.icarus.R.id.button_bold);
+        generalButtons.put(Button.NAME_OL, com.github.mr5.icarus.R.id.button_list_ol);
+        generalButtons.put(Button.NAME_BLOCKQUOTE, com.github.mr5.icarus.R.id.button_blockquote);
+        generalButtons.put(Button.NAME_HR, com.github.mr5.icarus.R.id.button_hr);
+        generalButtons.put(Button.NAME_UL, com.github.mr5.icarus.R.id.button_list_ul);
+        generalButtons.put(Button.NAME_ALIGN_LEFT, com.github.mr5.icarus.R.id.button_align_left);
+        generalButtons.put(Button.NAME_ALIGN_CENTER, com.github.mr5.icarus.R.id.button_align_center);
+        generalButtons.put(Button.NAME_ALIGN_RIGHT, com.github.mr5.icarus.R.id.button_align_right);
+        generalButtons.put(Button.NAME_ITALIC, com.github.mr5.icarus.R.id.button_italic);
+        generalButtons.put(Button.NAME_INDENT, com.github.mr5.icarus.R.id.button_indent);
+        generalButtons.put(Button.NAME_OUTDENT, com.github.mr5.icarus.R.id.button_outdent);
+        generalButtons.put(Button.NAME_CODE, com.github.mr5.icarus.R.id.button_math);
+        generalButtons.put(Button.NAME_UNDERLINE, com.github.mr5.icarus.R.id.button_underline);
 
         for (String name : generalButtons.keySet()) {
             TextView textView = (TextView) findViewById(generalButtons.get(name));
@@ -80,17 +79,23 @@ public class MainActivity extends ActionBarActivity {
         }
         TextView linkButtonTextView = (TextView) findViewById(R.id.button_link);
         linkButtonTextView.setTypeface(iconfont);
-        LinkButton linkButton = new LinkButton(linkButtonTextView, icarus);
+        TextViewButton linkButton = new TextViewButton(linkButtonTextView, icarus);
+        linkButton.setName(Button.NAME_LINK);
+        linkButton.setPopover(new LinkPopoverImpl(linkButtonTextView, icarus));
         toolbar.addButton(linkButton);
 
         TextView imageButtonTextView = (TextView) findViewById(R.id.button_image);
         imageButtonTextView.setTypeface(iconfont);
-        ImageButton imageButton = new ImageButton(imageButtonTextView, icarus);
+        TextViewButton imageButton = new TextViewButton(imageButtonTextView, icarus);
+        imageButton.setName(Button.NAME_IMAGE);
+        imageButton.setPopover(new ImagePopoverImpl(imageButtonTextView, icarus));
         toolbar.addButton(imageButton);
 
         TextView htmlButtonTextView = (TextView) findViewById(R.id.button_html5);
         htmlButtonTextView.setTypeface(iconfont);
-        HtmlButton htmlButton = new HtmlButton(htmlButtonTextView, icarus);
+        TextViewButton htmlButton = new TextViewButton(htmlButtonTextView, icarus);
+        htmlButton.setName(Button.NAME_HTML);
+        htmlButton.setPopover(new HtmlPopoverImpl(htmlButtonTextView, icarus));
         toolbar.addButton(htmlButton);
         return toolbar;
     }

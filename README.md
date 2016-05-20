@@ -23,7 +23,7 @@ Maybe the best rich text editor on android platform. Base on [Simditor](https://
 ## Usage
 Add this line to your `build.gradle` file under your module directory.
 ```groovy
-compile 'com.github.mr5:icarus:0.1.12-SNAPSHOT'
+compile 'com.github.mr5:icarus:0.1.13-SNAPSHOT'
 ```
 Java codes:
 ```java
@@ -52,7 +52,7 @@ class EditorActivity extends Activity {
         options.setPlaceholder("Placeholder...");
         icarus = new Icarus(toolbar, options, webView);
         TextView boldButton = new TextViewButton()
-        boldButton.setName("bold");
+        boldButton.setName(Button.NAME_BOLD);
 		toolbar.addButton(boldButton);
         icarus.render();
     }
@@ -131,7 +131,7 @@ Example:
 
 ```java
 // option replacement.
-options.setAllowedTags(new String[]{"a", "span", "img"});
+options.setAllowedTags(Arrays.asList("a", "span", "img");
 // add tag to current tag list.
 options.addAllowedTag("pre");
 ```
@@ -159,12 +159,30 @@ options.setAllowedAttributes(new HashMap<String, List<String>>());
 options.addAllowedAttributes("a", Arrays.asList("class", "src", "alt", "data-type"));
 ```
 
-#### Load Javascript or Stylesheet files.
+## Load Javascript or Stylesheet files.
 
 ```java
 icarus.loadCSS("file:///android_asset/editor.css");
 icarus.loadJs("file:///android_asset/test.js");
 ```
+
+## Popover
+
+Some buttons depend user's actions, such as `Button.NAME_LINK`, `Button.NAME_IMAGE`. So you want to show a popover for user to do these actions. Icarus offered 3 Popover Implementations, [`HtmlPopoverImpl`](library/src/main/java/com/github/mr5/icarus/popover/HtmlPopoverImpl.java),  [`ImagePopoverImpl`](library/src/main/java/com/github/mr5/icarus/popover/ImagePopoverImpl.java),  [`LinkPopoverImpl`](library/src/main/java/com/github/mr5/icarus/popover/LinkPopoverImpl.java),  
+
+![popover](popover.png)	
+
+Samples:
+```java
+TextView imageButtonTextView = (TextView) findViewById(R.id.button_image);
+        imageButtonTextView.setTypeface(iconfont);
+        TextViewButton imageButton = new TextViewButton(imageButtonTextView, icarus);
+        imageButton.setName(Button.NAME_IMAGE);
+        imageButton.setPopover(new ImagePopoverImpl(imageButtonTextView, icarus));
+        toolbar.addButton(imageButton);
+```
+
+> You can implement your own popover to handler user's actions.
 
 ## License
 [MIT](https://opensource.org/licenses/MIT)

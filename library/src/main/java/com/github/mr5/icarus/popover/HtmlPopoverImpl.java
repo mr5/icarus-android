@@ -1,7 +1,9 @@
-package com.github.mr5.icarus.button;
+package com.github.mr5.icarus.popover;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -12,17 +14,21 @@ import com.github.mr5.icarus.R;
 import com.github.mr5.icarus.entity.Html;
 import com.google.gson.Gson;
 
-public class HtmlButton extends TextViewButton {
+public class HtmlPopoverImpl implements Popover {
     protected Context context;
     protected EditText htmlInput;
     protected Dialog dialog;
     protected android.widget.Button okButton;
     protected android.widget.Button cancelButton;
+    protected TextView textView;
+    protected Icarus icarus;
+    protected Handler mainLopperHandler;
 
-    public HtmlButton(TextView textView, Icarus icarus) {
-        super(textView, icarus);
-        setName("html");
-        context = getTextView().getContext();
+    public HtmlPopoverImpl(TextView textView, Icarus icarus) {
+        this.textView = textView;
+        this.icarus = icarus;
+        context = textView.getContext();
+        mainLopperHandler = new Handler(Looper.getMainLooper());
         initDialog();
     }
 
@@ -30,7 +36,7 @@ public class HtmlButton extends TextViewButton {
     protected void initDialog() {
         dialog = new Dialog(context);
 
-        dialog.setTitle("插入 HTML 代码");
+        dialog.setTitle("Insert raw HTML codes.");
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View formView = inflater.inflate(R.layout.form_html, null);
         dialog.setContentView(formView);
@@ -39,8 +45,9 @@ public class HtmlButton extends TextViewButton {
         cancelButton = (android.widget.Button) formView.findViewById(R.id.button_cancel);
     }
 
+
     @Override
-    public void popover(String params, final String callbackName) {
+    public void show(String params, final String callbackName) {
         Gson gson = new Gson();
 
         final Html html = gson.fromJson(params, Html.class);
@@ -57,7 +64,7 @@ public class HtmlButton extends TextViewButton {
                         dialog.dismiss();
                     }
                 });
-                getIcarus().jsRemoveCallback(callbackName);
+                icarus.jsRemoveCallback(callbackName);
             }
         });
         okButton.setOnClickListener(new View.OnClickListener() {
@@ -68,11 +75,16 @@ public class HtmlButton extends TextViewButton {
                     public void run() {
                         dialog.dismiss();
                         html.setContent(htmlInput.getText().toString());
-                        getIcarus().jsCallback(callbackName, html, Html.class);
+                        icarus.jsCallback(callbackName, html, Html.class);
                     }
                 });
             }
         });
         dialog.show();
+    }
+
+    @Override
+    public void hide() {
+        dialog.dismiss();
     }
 }

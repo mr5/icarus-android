@@ -75,11 +75,11 @@ public class TextViewToolbar implements Toolbar {
     public void popover(String buttonName, final String params, final String callbackName) {
         final TextViewButton button = buttons.get(buttonName);
         Log.d("@popover", buttonName);
-        if (button != null) {
+        if (button != null && button.getPopover() != null) {
             mainLopperHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    button.popover(params, callbackName);
+                    button.getPopover().show(params, callbackName);
                 }
             });
         }
