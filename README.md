@@ -44,7 +44,7 @@ class EditorActivity extends Activity {
         setContentView(R.layout.activity_main);
         webView = (WebView) findViewById(R.id.editor);
         // I offered a toolbar to manage editor buttons which implements TextView that with icon fonts. 
-        // It's just a collection, not a Android View implementation. 
+        // It's just a collection, not an Android View implementation. 
         // TextViewToolbar will listen click events on all buttons that added to it. 
         // You can implement your own `Toolbar`, to prevent these default behaviors.
         TextViewToolbar toolbar = new TextViewToolbar();
@@ -166,6 +166,11 @@ toolbar.addButton(imageButton);
 
 > You can implement your own popover to handler user's actions.
 
+## Insert html to current selection
+
+```java
+icarus.insertHtml("<iframe src=\"xxx\"></iframe>");
+```
 
 ## Contents getting and setting
 ```java
