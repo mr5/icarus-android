@@ -1,8 +1,3 @@
-/*!
-* Simditor v2.3.6
-* http://simditor.tower.im/
-* 2016-05-13
-*/
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set

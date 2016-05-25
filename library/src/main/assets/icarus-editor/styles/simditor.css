@@ -192,16 +192,6 @@ table {
   content: '\f01e';
 }
 
-body, html {
-  overflow-x: hidden;
-}
-
-textarea {
-  border: none;
-  outline: none;
-  margin: 5px;
-}
-
 .simditor {
   position: relative;
   border: none;
