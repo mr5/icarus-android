@@ -121,9 +121,6 @@ public class TextViewButton implements Button {
         icarus.jsExec("javascript: editor.toolbar.execCommand('" + getName() + "')");
     }
 
-    public void popover(String params, String callbackName) {
-    }
-
     public void resetStatus() {
         setActivated(false);
         setEnabled(true);
