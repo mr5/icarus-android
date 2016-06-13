@@ -23,7 +23,7 @@ Maybe the best rich text editor on android platform. Base on [Simditor](https://
 ## Usage
 Add this line to your `build.gradle` file under your module directory.
 ```groovy
-compile 'com.github.mr5:icarus:0.1.14-SNAPSHOT'
+compile 'com.github.mr5:icarus:0.1.14'
 ```
 Java codes:
 ```java
