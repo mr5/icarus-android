@@ -99,6 +99,17 @@
                 android:id="@+id/button_underline"
                 style="@style/EditorIcon"
                 android:text="@string/icon_underline" />
+
+            <TextView
+                android:id="@+id/button_strike_through"
+                style="@style/EditorIcon"
+                android:text="@string/icon_strike_through" />
+
+            <TextView
+                android:id="@+id/button_font_scale"
+                style="@style/EditorIcon"
+                android:text="@string/icon_font" />
+
             <TextView
                 android:id="@+id/button_html5"
                 style="@style/EditorIcon"

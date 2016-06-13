@@ -1,0 +1,69 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <RadioGroup
+        android:id="@+id/font_scale_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/font_scale_x_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X Large" />
+
+        <RadioButton
+            android:id="@+id/font_scale_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Large" />
+
+        <RadioButton
+            android:id="@+id/font_scale_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Normal" />
+
+        <RadioButton
+            android:id="@+id/font_scale_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Small" />
+
+        <RadioButton
+            android:id="@+id/font_scale_x_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X Small" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/font_button_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/button_activated"
+            android:text="@android:string/ok"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/font_button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:background="@color/button_enabled"
+            android:text="@android:string/cancel"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</LinearLayout>

@@ -9,7 +9,7 @@ public interface Button {
     public static final String NAME_ITALIC = "italic";
     public static final String NAME_UNDERLINE = "underline";
     public static final String NAME_STRIKETHROUGH = "strikethrough";
-    public static final String NAME_FONT_SCALE = "fontsSale";
+    public static final String NAME_FONT_SCALE = "fontScale";
     public static final String NAME_COLOR = "color";
     public static final String NAME_OL = "ol";
     public static final String NAME_UL = "ul";
@@ -39,8 +39,6 @@ public interface Button {
     public void setActivated(boolean activated);
 
     public void command();
-
-    public void popover(String params, String callbackName);
 
     public void resetStatus();
 

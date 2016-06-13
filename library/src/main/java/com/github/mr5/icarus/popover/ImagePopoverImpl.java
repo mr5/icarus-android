@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -40,6 +41,7 @@ public class ImagePopoverImpl implements Popover {
         dialog.setTitle("Insert image");
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View formView = inflater.inflate(R.layout.form_image, null);
+//        dialog.getWindow().setLayout(300, 400);
         dialog.setContentView(formView);
         srcInput = (EditText) formView.findViewById(R.id.edit_src);
         altInput = (EditText) formView.findViewById(R.id.edit_alt);
