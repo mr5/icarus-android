@@ -169,7 +169,7 @@ toolbar.addButton(imageButton);
 ## Insert html to current selection
 
 ```java
-icarus.insertHtml("<iframe src=\"xxx\"></iframe>");
+icarus.insertHtml("<iframe src=\\"xxx\\"></iframe>");
 ```
 
 ## Contents getting and setting
