@@ -15,6 +15,7 @@ import com.github.mr5.icarus.TextViewToolbar;
 import com.github.mr5.icarus.Toolbar;
 import com.github.mr5.icarus.button.Button;
 import com.github.mr5.icarus.button.FontScaleButton;
+import com.github.mr5.icarus.button.HeadingButton;
 import com.github.mr5.icarus.button.TextViewButton;
 import com.github.mr5.icarus.entity.Options;
 import com.github.mr5.icarus.popover.FontScalePopoverImpl;
@@ -107,6 +108,24 @@ public class MainActivity extends ActionBarActivity {
         TextViewButton fontScaleButton = new FontScaleButton(fontScaleTextView, icarus);
         fontScaleButton.setPopover(new FontScalePopoverImpl(fontScaleTextView, icarus));
         toolbar.addButton(fontScaleButton);
+
+        TextView headingTextViewH1 = (TextView) findViewById(R.id.button_h1);
+        headingTextViewH1.setTypeface(iconfont);
+        TextViewButton headingH1Button = new HeadingButton(headingTextViewH1, icarus);
+        headingH1Button.setName(HeadingButton.NAME_HEADER_H1);
+        toolbar.addButton(headingH1Button);
+
+        TextView headingTextViewH2 = (TextView) findViewById(R.id.button_h2);
+        headingTextViewH1.setTypeface(iconfont);
+        TextViewButton headingH2Button = new HeadingButton(headingTextViewH2, icarus);
+        headingH2Button.setName(HeadingButton.NAME_HEADER_H2);
+        toolbar.addButton(headingH2Button);
+
+        TextView headingTextViewH3 = (TextView) findViewById(R.id.button_h3);
+        headingTextViewH1.setTypeface(iconfont);
+        TextViewButton headingH3Button = new HeadingButton(headingTextViewH3, icarus);
+        headingH3Button.setName(HeadingButton.NAME_HEADER_H3);
+        toolbar.addButton(headingH3Button);
         return toolbar;
     }
 

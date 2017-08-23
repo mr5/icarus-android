@@ -39,4 +39,10 @@
     <string name="icon_font_minus">&#xf01c;</string>
     <string name="icon_font_markdown">&#xf01d;</string>
     <string name="icon_checklist">&#xf01e;</string>
+    <string name="icon_h1" translatable="false">H1</string>
+    <string name="icon_h2" translatable="false">H2</string>
+    <string name="icon_h3" translatable="false">H3</string>
+    <string name="icon_h4" translatable="false">H4</string>
+    <string name="icon_h5" translatable="false">H5</string>
+    <string name="icon_h6" translatable="false">H6</string>
 </resources>
