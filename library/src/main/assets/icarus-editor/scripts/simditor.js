@@ -14,7 +14,7 @@
   }
 }(this, function ($, SimpleModule, simpleHotkeys, simpleUploader) {
 
-var AlignCenterButton, AlignLeftButton, AlignRightButton, AlignmentButton, BlockquoteButton, BoldButton, Button, Clipboard, CodeButton, CodePopover, ColorButton, FontScaleButton, Formatter, HrButton, HtmlButton, ImageButton, ImagePopover, IndentButton, Indentation, InputManager, ItalicButton, Keystroke, LinkButton, ListButton, OrderListButton, OutdentButton, Popover, Selection, Simditor, SimditorMention, StrikethroughButton, TableButton, TitleButton, Toolbar, UnderlineButton, UndoManager, UnorderListButton, Util,
+var H1Button, H2Button, H3Button, AlignCenterButton, AlignLeftButton, AlignRightButton, AlignmentButton, BlockquoteButton, BoldButton, Button, Clipboard, CodeButton, CodePopover, ColorButton, FontScaleButton, Formatter, HrButton, HtmlButton, ImageButton, ImagePopover, IndentButton, Indentation, InputManager, ItalicButton, Keystroke, LinkButton, ListButton, OrderListButton, OutdentButton, Popover, Selection, Simditor, SimditorMention, StrikethroughButton, TableButton, TitleButton, Toolbar, UnderlineButton, UndoManager, UnorderListButton, Util,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
@@ -2999,6 +2999,7 @@ Button = (function(superClass) {
     }
     console.log("active", active);
     console.log(this);
+    console.log(new Error('1'));
     IcarusBridge.setButtonActivated(this.name, active);
     this.active = active;
     return this.el.toggleClass('active', this.active);
@@ -3511,6 +3512,7 @@ TitleButton = (function(superClass) {
   };
 
   TitleButton.prototype.command = function(param) {
+  document.execCommand('bold');
     var $rootNodes;
     $rootNodes = this.editor.selection.rootNodes();
     this.editor.selection.save();
@@ -3533,6 +3535,209 @@ TitleButton = (function(superClass) {
 })(Button);
 
 Simditor.Toolbar.addButton(TitleButton);
+
+//added new type button H1Button, H2Button, H3Button
+H1Button = (function(superClass) {
+  extend(H1Button, superClass);
+
+  function H1Button() {
+    return H1Button.__super__.constructor.apply(this, arguments);
+  }
+
+  H1Button.prototype.name = 'h1_button';
+
+  H1Button.prototype.htmlTag = 'h1';
+
+  H1Button.prototype.disableTag = 'pre, table';
+
+  H1Button.prototype._init = function() {
+    this.menu = [
+     {
+        name: 'h1',
+        text: this._t('h1_button') + ' 1',
+        param: 'h1'
+      }
+    ];
+    return H1Button.__super__._init.call(this);
+  };
+
+  H1Button.prototype.setActive = function(active, param) {
+    H1Button.__super__.setActive.call(this, active);
+    if (active) {
+      param || (param = this.node[0].tagName.toLowerCase());
+    }
+    this.el.removeClass('active-p active-h1 active-h2 active-h3 active-h4 active-h5');
+    if (active) {
+      return this.el.addClass('active active-' + param);
+    }
+  };
+
+  H1Button.prototype.command = function(param) {
+    var $rootNodes;
+    $rootNodes = this.editor.selection.rootNodes();
+    var selectedNode = editor.selection.nodes()[0];
+    this.editor.selection.save();
+
+        console.log(selectedNode);
+        console.log($rootNodes);
+
+    $rootNodes.each((function(_this) {
+      return function(i, node) {
+        var $node;
+        $node = $(node);
+        if ($node.is('blockquote') || $node.is(_this.disableTag) || _this.editor.util.isDecoratedNode($node)) {
+                  return;
+                }
+                  if (node === selectedNode && $node.is(param)) {
+                    $('<p/>').append($node.contents()).replaceAll($node);
+                    return;
+                  }
+                return $('<' + param + '/>').append($node.contents()).replaceAll($node);
+      };
+    })(this));
+    this.editor.selection.restore();
+    return this.editor.trigger('valuechanged');
+  };
+
+  return H1Button;
+
+})(Button);
+Simditor.Toolbar.addButton(H1Button);
+
+H2Button = (function(superClass) {
+  extend(H2Button, superClass);
+
+  function H2Button() {
+    return H2Button.__super__.constructor.apply(this, arguments);
+  }
+
+  H2Button.prototype.name = 'h2_button';
+
+  H2Button.prototype.htmlTag = 'h2';
+
+  H2Button.prototype.disableTag = 'pre, table';
+
+  H2Button.prototype._init = function() {
+    this.menu = [
+     {
+        name: 'h2',
+        text: this._t('h2_button') + ' 1',
+        param: 'h2'
+      }
+    ];
+    return H2Button.__super__._init.call(this);
+  };
+
+  H2Button.prototype.setActive = function(active, param) {
+    H2Button.__super__.setActive.call(this, active);
+    if (active) {
+      param || (param = this.node[0].tagName.toLowerCase());
+    }
+    this.el.removeClass('active-p active-h1 active-h2 active-h3 active-h4 active-h5');
+    if (active) {
+      return this.el.addClass('active active-' + param);
+    }
+  };
+
+  H2Button.prototype.command = function(param) {
+    var $rootNodes;
+    $rootNodes = this.editor.selection.rootNodes();
+    var selectedNode = editor.selection.nodes()[0];
+    this.editor.selection.save();
+
+        console.log(selectedNode);
+        console.log($rootNodes);
+
+    $rootNodes.each((function(_this) {
+      return function(i, node) {
+        var $node;
+        $node = $(node);
+        if ($node.is('blockquote') || $node.is(_this.disableTag) || _this.editor.util.isDecoratedNode($node)) {
+                  return;
+                }
+                  if (node === selectedNode && $node.is(param)) {
+                    $('<p/>').append($node.contents()).replaceAll($node);
+                    return;
+                  }
+                return $('<' + param + '/>').append($node.contents()).replaceAll($node);
+      };
+    })(this));
+    this.editor.selection.restore();
+    return this.editor.trigger('valuechanged');
+  };
+
+  return H2Button;
+
+})(Button);
+Simditor.Toolbar.addButton(H2Button);
+
+
+H3Button = (function(superClass) {
+  extend(H3Button, superClass);
+
+  function H3Button() {
+    return H3Button.__super__.constructor.apply(this, arguments);
+  }
+
+  H3Button.prototype.name = 'h3_button';
+
+  H3Button.prototype.htmlTag = 'h3';
+
+  H3Button.prototype.disableTag = 'pre, table';
+
+  H3Button.prototype._init = function() {
+    this.menu = [
+     {
+        name: 'h3',
+        text: this._t('h3_button') + ' 1',
+        param: 'h3'
+      }
+    ];
+    return H3Button.__super__._init.call(this);
+  };
+
+  H3Button.prototype.setActive = function(active, param) {
+    H3Button.__super__.setActive.call(this, active);
+    if (active) {
+      param || (param = this.node[0].tagName.toLowerCase());
+    }
+    this.el.removeClass('active-p active-h1 active-h2 active-h3 active-h4 active-h5');
+    if (active) {
+      return this.el.addClass('active active-' + param);
+    }
+  };
+
+  H3Button.prototype.command = function(param) {
+    var $rootNodes;
+    $rootNodes = this.editor.selection.rootNodes();
+    var selectedNode = editor.selection.nodes()[0];
+    this.editor.selection.save();
+
+        console.log(selectedNode);
+        console.log($rootNodes);
+
+    $rootNodes.each((function(_this) {
+      return function(i, node) {
+        var $node;
+        $node = $(node);
+        if ($node.is('blockquote') || $node.is(_this.disableTag) || _this.editor.util.isDecoratedNode($node)) {
+                  return;
+                }
+                  if (node === selectedNode && $node.is(param)) {
+                    $('<p/>').append($node.contents()).replaceAll($node);
+                    return;
+                  }
+                return $('<' + param + '/>').append($node.contents()).replaceAll($node);
+      };
+    })(this));
+    this.editor.selection.restore();
+    return this.editor.trigger('valuechanged');
+  };
+
+  return H3Button;
+
+})(Button);
+Simditor.Toolbar.addButton(H3Button);
 
 HtmlButton = (function(superClass) {
   extend(HtmlButton, superClass);

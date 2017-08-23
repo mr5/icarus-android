@@ -114,6 +114,21 @@
                 android:id="@+id/button_html5"
                 style="@style/EditorIcon"
                 android:text="@string/icon_html5" />
+
+            <TextView
+                android:id="@+id/button_h1"
+                style="@style/EditorIcon"
+                android:text="@string/icon_h1" />
+
+            <TextView
+                android:id="@+id/button_h2"
+                style="@style/EditorIcon"
+                android:text="@string/icon_h2" />
+
+            <TextView
+                android:id="@+id/button_h3"
+                style="@style/EditorIcon"
+                android:text="@string/icon_h2" />
         </LinearLayout>
     </HorizontalScrollView>
 </LinearLayout>
